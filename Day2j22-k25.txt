@@ -116,6 +116,136 @@ ip dhcp pool _____.com
   swi Voice vlan 25
   do sh ip dhcp binding
 
+TemPlate_CoreSW: FOR RST HAYUP LAB: 
+\\\\\\\TaskUS\\\\\\\\\
+@Delta 1: 
+config t
+vlan 25
+ name TASKUS.com
+ exit
+Int vlan 25
+ no shut
+ ip add 10.0.32.1 255.255.224.0
+ip dhcp excluded-add 10.0.32.1 10.0.32.100
+ip dhcp pool TASKUS.com
+ network 10.0.32.0 255.255.224.0
+ default-router 10.0.32.1
+ domain-name TASKUS.com
+ dns-server 10.41.1.10
+ option 150 ip 10.41.100.8
+ Int E 1/0
+  switchport mode access
+  switchport access vlan 25
+  do sh ip dhcp binding
+
+@server1
+config t
+int e 1/0
+no shut
+ip add dhcp
+do bp
+
+\\\\\\\Etelecare-Naga\\\\\\\\\\
+@Delta 1: 
+config t
+vlan 26
+ name ETELECARENaga.com
+ exit
+Int vlan 26
+ no shut
+ ip add 10.0.4.1 255.255.252.0
+ip dhcp excluded-add 10.0.4.1 10.0.4.100
+ip dhcp pool ETELECARENaga.com
+ network 10.0.4.0 255.255.252.0
+ default-router 10.0.4.1
+ domain-name TASKUS.com
+ dns-server 10.41.1.10
+ option 150 ip 10.41.100.8
+
+@@Delta 2 Core Switch 
+Config terminal
+Int E 1/0
+  switchport mode access
+  switchport access vlan 26
+  do sh ip dhcp binding
+
+@server1
+config t
+int e 1/0
+no shut
+ip add dhcp
+do bp
+
+@server2
+config t
+int e 1/0
+no shut
+ip add dhcp
+do bp
+
+\\\\\\\SITEL\\\\\\\\\\
+@Delta1: 
+config t
+vlan 27
+ name SITEL.com
+ exit
+Int vlan 27
+ no shut
+ ip add 10.0.64.1 255.255.192.0
+ip dhcp excluded-add 10.0.64.1 10.0.64.100
+ip dhcp pool SITEL.com
+ network 10.0.64.0 255.255.192.0
+ default-router 10.0.64.1
+ domain-name SITEL.com
+ dns-server 10.41.1.10
+ option 150 ip 10.41.100.8
+
+@@Access Switch 1
+Config terminal
+Int E 0/0
+  switchport mode access
+  switchport access vlan 27
+  do sh ip dhcp binding
+
+@P1
+config t
+int e 0/0
+shut
+no shut
+ip add dhcp
+do bp
+
+\\\\\\\Fundever\\\\\\\\\\
+@Delta1: 
+config t
+vlan 28
+ name FUNDEVER.com
+ exit
+Int vlan 28
+ no shut
+ ip add 10.0.8.1 255.255.248.0
+ip dhcp excluded-add 10.0.8.1 10.0.8.100
+ip dhcp pool FUNDEVER.com
+ network 10.0.8.0 255.255.248.0
+ default-router 10.0.8.1
+ domain-name FUNDEVER.com
+ dns-server 10.41.1.10
+ option 150 ip 10.41.100.8
+
+@@Access Switch 2
+Config terminal
+Int E 1/0
+  switchport mode access
+  switchport access vlan 28
+  do sh ip dhcp binding
+
+@P2
+config t
+int e 1/0
+no shut
+ip add dhcp
+do bp
+
 Ex.5.3: Compute and Configure SYKESASIA.com
 call center with 388 Agents,Tls,QAs,Pm. using
 10.0.0.0/8:
