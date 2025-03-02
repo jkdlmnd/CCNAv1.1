@@ -219,7 +219,7 @@ dial-peer voice 4 pots
    port 0/0/3
 end
 
-!!IP telephony or Six Digit Salary.
+!!IP telephony or Six Digit Salary. \\CUCM
 config t   
 no telephony-service
 telephony-service
@@ -261,7 +261,7 @@ Ephone 2
   restart  
 end
 
-@@@Enabling Video Calls
+@@@Enabling Video Calls \\cucm
 configure terminal
 ephone 1
    video
@@ -275,14 +275,14 @@ ephone 2
    call start slow
 end
 
-!!@@allow incoming calls
+!!@@allow incoming calls \\cucm
 configure terminal
 voice service voip
 ip address trusted list
 ipv4 0.0.0.0 0.0.0.0
 exit
 
-!OUTGOING CALL FROM CUCM TO OTHER CUCM.
+!OUTGOING CALL FROM CUCM TO OTHER CUCM. \\cucm, once lang mag-paste
 configure terminal
  dial-peer voice 11 Voip
  destination-pattern 11..
@@ -460,7 +460,7 @@ route  add  200.0.0.0   mask  255.255.255.0   10._.1.4
 ********************************************
 
  
-@@@@@@@@@IVRS: interActive Voice Response System: maticSagot
+@@@@@@@@@IVRS: interActive Voice Response System: maticSagot \\cucm
 
 config t
 dial-peer voice 69 voip
