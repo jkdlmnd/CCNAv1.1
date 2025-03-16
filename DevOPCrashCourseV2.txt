@@ -21,7 +21,6 @@ config t
 iox
 interface GigabitEthernet1
 no ip address dhcp
-ip nat outside
 no shut
 exit
 !
